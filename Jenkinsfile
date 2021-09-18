@@ -4,9 +4,9 @@ pipeline {
   stage('Docker Build and Tag') {
            steps {
               
-                sh 'docker build -t nginxtest:latest .' 
-                sh 'docker tag nginxtest nikhilnidhi/nginxtest:latest'
-                sh 'docker tag nginxtest nikhilnidhi/nginxtest:$BUILD_NUMBER'
+                sh 'docker build -t apache2:latest .' 
+                sh 'docker tag apache2 lakshmi1994/apache-lakshmi:v2'
+                
                
           }
         }
@@ -14,27 +14,12 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
-        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-          sh  'docker push nikhilnidhi/nginxtest:latest'
-          sh  'docker push nikhilnidhi/nginxtest:$BUILD_NUMBER' 
+        withDockerRegistry([ credentialsId: "dockerHub", url: "https://hub.docker.com/repository/docker/lakshmi1994" ]) {
+          sh  'docker push  lakshmi1994/apache-lakshmi:v2'
+           
         }
                   
           }
         }
      
-      stage('Run Docker container on Jenkins Agent') {
-             
-            steps {
-                sh "docker run -d -p 4030:80 nikhilnidhi/nginxtest"
- 
-            }
-        }
- stage('Run Docker container on remote hosts') {
-             
-            steps {
-                sh "docker -H ssh://jenkins@172.31.28.25 run -d -p 4001:80 nikhilnidhi/nginxtest"
- 
-            }
-        }
-    }
-}
+ }
