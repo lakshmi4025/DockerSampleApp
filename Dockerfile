@@ -1,7 +1,11 @@
-FROM nginx
+FROM ubuntu
 
-COPY wrapper.sh /
+ENV DEBIAN_FRONTEND=noninteractive
 
-COPY html /usr/share/nginx/html
+RUN apt-get -y  update
 
-CMD ["./wrapper.sh"]
+RUN apt-get -y install apache2
+
+EXPOSE 80
+
+CMD ["/etc/init.d/apache2" ,"start", "-D",  "FOREGROUND"]
