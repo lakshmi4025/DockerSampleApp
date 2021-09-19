@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent {Dockerfile true}
     stages {
       stage('checkout') {
            steps {
