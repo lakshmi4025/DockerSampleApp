@@ -1,5 +1,7 @@
 pipeline {
-    agent {Dockerfile true}
+    agent {
+        Dockerfile true
+    }
     stages {
       stage('checkout') {
            steps {
@@ -8,16 +10,21 @@ pipeline {
              
           }
         }
+     
   stage('Docker Build and Tag') {
            steps {
               
-                sh 'docker build -t apache2:latest .' 
-                sh 'docker tag apache2 lakshmi1994/apache-lakshmi:v2'
-                
+                sh 'docker build -t apache2 .' 
+           }
+  
+  }
+        
+    }   
+}
                
-          }
-        }
- }
+       
+        
+ 
         
      
  
