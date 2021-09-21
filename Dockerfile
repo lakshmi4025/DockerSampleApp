@@ -2,10 +2,10 @@ FROM ubuntu
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get -y  update
+RUN apt-get update -y
 
-RUN apt-get -y install apache2
+RUN apt-get  install apache2 -y
 
-EXPOSE 80
+EXPOSE 82
 
-CMD ["/etc/init.d/apache2" ,"start", "-D",  "FOREGROUND"]
+
